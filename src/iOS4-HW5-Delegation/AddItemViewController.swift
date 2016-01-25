@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EventSaver {
+    func saveData (event:String)
+}
+
 class AddItemViewController: UIViewController {
 
     @IBOutlet weak var itemTextField: UITextField!
@@ -15,7 +19,11 @@ class AddItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    var delegate:EventSaver?
+    
     @IBAction func saveButtonPressed(sender: AnyObject) {
+        if let itemToBeAdded = itemTextField.text {
+            delegate?.saveData(itemToBeAdded)}
+       navigationController?.popViewControllerAnimated(true)
     }
 }
